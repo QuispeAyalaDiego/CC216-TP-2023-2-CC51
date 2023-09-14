@@ -1,0 +1,20 @@
+//verificar cantidad de cancelaciones por mes
+> cancelaciones_por_mes <- data %>%
++     group_by(arrival_date_month) %>%
++     summarise(total_cancelaciones = sum(is_canceled))
+> View(cancelaciones_por_mes)
+> cancelaciones_por_mes<-cancelaciones_por_mes %>% arrange(desc(total_cancelaciones))
+////////////////////////////////////////////////////
+//verificar cantidad de reservas sin cancelaciones por hotel
+> sum(data$hotel=="City Hotel"& data$is_canceled==0)
+[1] 46228
+> sum(data$hotel=="Resort Hotel"& data$is_canceled==0)
+[1] 28938
+> sum(data$is_canceled==0)
+[1] 75166
+////////////////////////////////////////////////////
+//verificar cuantas reservas tienen niño o bebe
+> reservas_con_ninos <- data %>%
++     filter(children > 0 | babies > 0)
+> View(reservas_con_ninos)
+> cantidad_reservas_con_ninos <- nrow(reservas_con_ninos)
