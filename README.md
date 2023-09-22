@@ -1,14 +1,15 @@
 
 #  TRABAJO PARCIAL
-##Análisis Exploratorio de un conjunto de Datos
+## Análisis Exploratorio de un conjunto de Datos
 #####  Carrera: Ciencias de la Computación
 
 
-|  AUTORES                 |                      
-|Quispe Ayala Diego Juan Pablo|
-|Roque Ponce, Christian Alonso          |
-|Retuerto Diaz, Pedro Alejandro      |
-|Luis Lázaro, Daniel Orlando
+|AUTORES    |
+| ----------|
+| Quispe Ayala Diego Juan Pablo  |
+| Roque Ponce, Christian Alonso     |
+| Retuerto Diaz, Pedro Alejandro   |
+| Luis Lázaro, Daniel Orlando    |
 
 
 ------------
@@ -38,3 +39,14 @@ El análisis de estos datos es fundamental para varios propósitos, entre ellos:
 **f. Planificación Estratégica a Largo Plazo:** Los datos históricos de demanda también son valiosos para la planificación estratégica a largo plazo. Los equipos directivos pueden utilizar estos datos para tomar decisiones sobre la expansión de la capacidad hotelera, la inversión en instalaciones adicionales o la introducción de nuevos servicios.
 
 **g. Investigación Académica:** Además de su utilidad práctica, estos datos también pueden ser valiosos para la investigación académica en áreas como la gestión hotelera, la ciencia de datos y la toma de decisiones. Los académicos pueden utilizar estos conjuntos de datos para desarrollar y probar modelos y teorías en el campo de la hospitalidad.
+
+
+#### 2. DESCRIPCIÓN DEL DATA SET
+En la siguiente tabla se muestra el nombre de cada una de las 32 columnas que conforman el dataset, así como el tipo de dato y una breve descripción de su contenido:
+
+
+| Encabezado 1 | Encabezado 2 | Encabezado 3 |
+| ------------ | ------------ | ------------ |
+| Dato 1       | Dato 2       | Dato 3       |
+| Dato 4       | Dato 5       | Dato 6       |
+
