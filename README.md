@@ -30,40 +30,45 @@ Este conjunto de datos proviene del articulo titulado "Hotel booking demand data
 #### 2. DESCRIPCIÓN DEL DATA SET
 En la siguiente tabla se muestra el nombre de cada una de las 32 columnas que conforman el dataset, así como el tipo de dato y una breve descripción de su contenido:
 
-|nº | Nombre de la Columna | Tipo de Datos | Descripción |
-| ------------ | ------------ | ------------ | ------------ |
-| 1 | hotel | Carácter (string) | Tipo de hotel (urbano o resort)|
-|2| is_canceled | Entero (int) | Indica si la reserva fue cancelada (1) o no (0). |
-|  3 |lead_time | Entero (int) | Tiempo en días entre la reserva y la llegada. |
-|  4| Fila 4, Col 2 | Entero (int)| Tiempo en días entre la reserva y la llegada. |
-|5 | Fila 5, Col 2 | Fila 5, Col 3 | Fila 5, Col 4 |
-|6 | Fila 6, Col 2 | Fila 6, Col 3 | Fila 6, Col 4 |
-| Fila 7, Col 1 | Fila 7, Col 2 | Fila 7, Col 3 | Fila 7, Col 4 |
-| Fila 8, Col 1 | Fila 8, Col 2 | Fila 8, Col 3 | Fila 8, Col 4 |
-| Fila 9, Col 1 | Fila 9, Col 2 | Fila 9, Col 3 | Fila 9, Col 4 |
-| Fila 10, Col 1 | Fila 10, Col 2 | Fila 10, Col 3 | Fila 10, Col 4 |
-| Fila 11, Col 1 | Fila 11, Col 2 | Fila 11, Col 3 | Fila 11, Col 4 |
-| Fila 12, Col 1 | Fila 12, Col 2 | Fila 12, Col 3 | Fila 12, Col 4 |
-| Fila 13, Col 1 | Fila 13, Col 2 | Fila 13, Col 3 | Fila 13, Col 4 |
-| Fila 14, Col 1 | Fila 14, Col 2 | Fila 14, Col 3 | Fila 14, Col 4 |
-| Fila 15, Col 1 | Fila 15, Col 2 | Fila 15, Col 3 | Fila 15, Col 4 |
-| Fila 16, Col 1 | Fila 16, Col 2 | Fila 16, Col 3 | Fila 16, Col 4 |
-| Fila 17, Col 1 | Fila 17, Col 2 | Fila 17, Col 3 | Fila 17, Col 4 |
-| Fila 18, Col 1 | Fila 18, Col 2 | Fila 18, Col 3 | Fila 18, Col 4 |
-| Fila 19, Col 1 | Fila 19, Col 2 | Fila 19, Col 3 | Fila 19, Col 4 |
-| Fila 20, Col 1 | Fila 20, Col 2 | Fila 20, Col 3 | Fila 20, Col 4 |
-| Fila 21, Col 1 | Fila 21, Col 2 | Fila 21, Col 3 | Fila 21, Col 4 |
-| Fila 22, Col 1 | Fila 22, Col 2 | Fila 22, Col 3 | Fila 22, Col 4 |
-| Fila 23, Col 1 | Fila 23, Col 2 | Fila 23, Col 3 | Fila 23, Col 4 |
-| Fila 24, Col 1 | Fila 24, Col 2 | Fila 24, Col 3 | Fila 24, Col 4 |
-| Fila 25, Col 1 | Fila 25, Col 2 | Fila 25, Col 3 | Fila 25, Col 4 |
-| Fila 26, Col 1 | Fila 26, Col 2 | Fila 26, Col 3 | Fila 26, Col 4 |
-| Fila 27, Col 1 | Fila 27, Col 2 | Fila 27, Col 3 | Fila 27, Col 4 |
-| Fila 28, Col 1 | Fila 28, Col 2 | Fila 28, Col 3 | Fila 28, Col 4 |
-| Fila 29, Col 1 | Fila 29, Col 2 | Fila 29, Col 3 | Fila 29, Col 4 |
-| Fila 30, Col 1 | Fila 30, Col 2 | Fila 30, Col 3 | Fila 30, Col 4 |
-| Fila 31, Col 1 | Fila 31, Col 2 | Fila 31, Col 3 | Fila 31, Col 4 |
-| Fila 32, Col 1 | Fila 32, Col 2 | Fila 32, Col 3 | Fila 32, Col 4 |
+
+#### 2. Data base
+
+
+
+| Nº          | Tipo de Datos  | Descripción                                            |
+| ---------------------------- | ---------------| ------------------------------------------------------ |
+| 1                            | hotel          | Carácter (string) | Tipo de hotel (urbano o resort).   |
+| 2                            | is_canceled    | Entero (int) | Indica si la reserva fue cancelada (1) o no (0). |
+| 3                            | lead_time      | Entero (int) | Tiempo en días entre la reserva y la llegada. |
+| 4                            | arrival_date_year | Entero (int) | Año de llegada.                       |
+| 5                            | arrival_date_month | Carácter (string) | Mes de llegada.                |
+| 6                            | arrival_date_week_number | Entero (int) | Número de semana del año de llegada. |
+| 7                            | arrival_date_day_of_month | Entero (int) | Día del mes de llegada.          |
+| 8                            | stays_in_weekend_nights | Entero (int) | Número de noches de fin de semana. |
+| 9                            | stays_in_week_nights | Entero (int) | Número de noches de la semana.     |
+| 10                           | adults         | Entero (int) | Cantidad de adultos.                   |
+| 11                           | children       | Entero (int) | Cantidad de niños.                     |
+| 12                           | babies         | Entero (int) | Cantidad de bebés.                     |
+| 13                           | meal           | Carácter (string) | Tipo de comida reservada.         |
+| 14                           | country        | Carácter (string) | País de origen del huésped.        |
+| 15                           | market_segment | Carácter (string) | Segmento de mercado de la reserva. |
+| 16                           | distribution_channel | Carácter (string) | Canal de distribución de la reserva. |
+| 17                           | is_repeated_guest | Entero (int) | Indica si el huésped es repetitivo (1) o no (0). |
+| 18                           | previous_cancellations | Entero (int) | Número de reservas canceladas previamente por el cliente. |
+| 19                           | previous_bookings_not_canceled | Entero (int) | Número de reservas previas no canceladas por el cliente. |
+| 20                           | reserved_room_type | Carácter (string) | Tipo de habitación reservada.       |
+| 21                           | assigned_room_type | Carácter (string) | Tipo de habitación asignada.        |
+| 22                           | booking_changes | Entero (int) | Número de cambios realizados en la reserva. |
+| 23                           | deposit_type   | Carácter (string) | Tipo de depósito utilizado en la reserva. |
+| 24                           | agent          | Entero (int) | Agente que realizó la reserva.          |
+| 25                           | company        | Entero (int) | Empresa asociada a la reserva.           |
+| 26                           | days_in_waiting_list | Entero (int) | Número de días en lista de espera.  |
+| 27                           | customer_type  | Carácter (string) | Tipo de cliente (por ejemplo, Transitorios, Grupos, etc.). |
+| 28                           | adr            | Numérico (float) | Tasa diaria promedio (Average Daily Rate). |
+| 29                           | required_car_parking_spaces | Entero (int) | Cantidad de espacios de estacionamiento requeridos. |
+| 30                           | total_of_special_requests | Entero (int) | Número total de solicitudes especiales. |
+| 31                           | reservation_status | Carácter (string) | Estado de la reserva.                |
+| 32                           | reservation_status_date | Fecha (date) | Fecha del estado de la reserva.       |
 
 
 
