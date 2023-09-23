@@ -33,7 +33,82 @@ En la siguiente tabla se muestra el nombre de cada una de las 32 columnas que co
 
 ##### 1.2. Casos de uso aplicables:
 a. ¿Cuántas reservas se realizan por tipo de hotel? o  ¿Qué tipo de hotel prefiere la gente? 
+```
+> sum(missing_data_rows$hotel=="Resort Hotel"&missing_data_rows$is_canceled==0)
+[1] 28938
+> sum(missing_data_rows$hotel=="City Hotel"&missing_data_rows$is_canceled==0)
+[1] 46228
+> sum(missing_data_rows$is_canceled==0)
+[1] 75166
 
+```
+b. ¿Está aumentando la demanda con el tiempo? 
+```
+```
+
+c. ¿Cuándo se producen las temporadas de reservas: alta, media y baja? 
+
+```
+ # Crear un gráfico de barras facetado por estación
+ggplot(missing_data_rows_seasons, aes(x = factor(arrival_date_year), y = total_bookings, fill = estacion)) +
+    geom_bar(stat = "identity", position = "stack") +
+    labs(x = "Año", y = "Número de Reservas", title = "Resumen de Reservas por Estación y Año") +
+    scale_fill_manual(values = c("Invierno" = "blue", "Primavera" = "green", "Verano" = "yellow", "Otoño" = "red")) +
+    theme_minimal() +
+    facet_wrap(~estacion, ncol = 4) # Facetado por estación
+
+
+```
+d. ¿Cuándo es menor la demanda de reservas? 
+```
+# Crear un gráfico de barras de la cantidad total de reservas por estación
+ggplot(missing_data_rows_seasons, aes(x = estacion, y = total_bookings, fill = estacion)) +
+    geom_bar(stat = "identity") +
+    labs(x = "Estación", y = "Número de Reservas", title = "Resumen de Reservas por Estación") +
+    scale_fill_manual(values = c("Invierno" = "blue", "Primavera" = "green", "Verano" = "yellow", "Otoño" = "red")) +
+    theme_minimal()
+
+```
+
+e. ¿Cuántas reservas incluyen niños y/o bebes? 
+
+```
+pie(conteo_bebes, labels = c("No tiene niño o bebe", "Tiene niño o bebe"), col = c("chartreuse1", "darkturquoise")	
+
+
+```
+
+
+f. ¿Es importante contar con espacios de estacionamiento? 
+
+g. ¿En qué meses del año se producen más cancelaciones de reservas?
+
+```
+# Convertir la columna 'reservation_status_date' a formato de fecha 
+missing_data_rows$reservation_status_date <-as.Date(missing_data_rows$reservation_status_date)
+
+# Crear una nueva columna 'Mes' para extraer el mes de la fecha de 'reservation_status_date'
+missing_data_rows <- missing_data_rows %>%
+    mutate(Mes = format(reservation_status_date, "%Y-%m"))
+
+# Filtrar los datos para obtener solo las cancelaciones (is_canceled == 1)
+cancelaciones <- missing_data_rows %>%
+    filter(is_canceled == 1)
+
+# Contar la cantidad de cancelaciones por mes
+conteo_cancelaciones <- cancelaciones %>%
+    group_by(Mes) %>%
+    summarize(Cantidad = n())
+
+# Crear el gráfico de barras
+ggplot(conteo_cancelaciones, aes(x = Mes, y = Cantidad)) +
+    geom_bar(stat = "identity", fill = "blue") +
+    labs(x = "Mes", y = "Cantidad de Cancelaciones", title = "Cancelaciones por Mes") +
+    theme_minimal() +
+    theme(axis.text.x = element_text(angle = 90, hjust = 1))
+
+
+```
 
 ------------
 #### 2. Data base
@@ -76,6 +151,68 @@ a. ¿Cuántas reservas se realizan por tipo de hotel? o  ¿Qué tipo de hotel pr
 | 32                           | reservation_status_date | Fecha (date) | Fecha del estado de la reserva.       |
 
 
+
+#### PRE-PROCESAR DATOS 
+
+- Identificar datos faltantes o NA:
+
+Para identificar los datos faltantes, procedimos a realizar un proceso de filtrado en el conjunto de datos con el fin de detectar todas las observaciones que presentan valores nulos, representados como "NA" o "NULL" en sus respectivas características.
+
+
+Adicionalmente, se observó que varias columnas presentan valores iguales a cero. En este sentido, se plantea la necesidad de considerar si es pertinente llevar a cabo una limpieza de datos en estas columnas o, en caso contrario, eliminarlas en caso de que no sean relevantes para las interrogantes planteadas en el análisis exploratorio de los datos.
+
+A continuación, se presenta el fragmento de código y el gráfico correspondiente
+
+
+
+
+```
+[
+missing_data_rows <- hotel_data %>%
+select(hotel,is_canceled,lead_time,arrival_date_year,arrival_date_month,arrival_date_week_number,arrival_date_day_of_month,stays_in_weekend_nights,stays_in_week_nights,adults,children,babies,meal,country,market_segment,distribution_channel,is_repeated_guest,previous_cancellations,previous_bookings_not_canceled,reserved_room_type,assigned_room_type,booking_changes,deposit_type,agent,company,days_in_waiting_list,customer_type,adr,required_car_parking_spaces,total_of_special_requests,reservation_status,reservation_status_date) %>%
+  filter_all(any_vars(is.na(.) | . == "NULL"))
+]
+
+```
+
+Con estos datos se procederá a elegir la información pertinente antes de ver que tipo de eliminación se debería realizar a los valores NA o NULL.
+
+
+### Explicación de las técnicas utilizadas para eliminar o completar los datos faltantes:
+
+En cuanto a la selección de los datos, se nos plantea la tarea de responder un conjunto de preguntas para hacer un análisis exploratorio de los datos. Estas respuestas denotan la necesidad de que ciertas columnas estén pre procesadas de manera correcta y de igual manera sean pertinentes para este caso.
+Es evidente que debemos reducir la cantidad de características (columnas) disponibles. Esto es debido a que algunas variables no contribuyen de manera significativa al análisis de los datos que estamos buscando obtener independientemente de si tienen valores NA o no.
+
+
+Las columnas importantes para responder a las preguntas planteadas :
+
+
+  -`hotel`: Permite distinguir entre "Resort Hotel" y "City Hotel" para analizar el tipo de hotel y las preferencias de los clientes.
+
+   -`is_canceled`: Necesaria para identificar las cancelaciones de reservas.
+
+ -`arrival_date_year`, `arrival_date_month`, `arrival_date_day_of_month`: Estas columnas son esenciales para analizar la demanda a lo largo del tiempo y para identificar las temporadas de reservas.
+
+
+-`adults`, `children` y `babies`: Permiten determinar cuántas reservas incluyen niños y/o bebés.
+
+ -`required_car_parking_spaces`: Es relevante para evaluar la importancia de los espacios de estacionamiento.
+
+
+
+
+Con eso dicho ahora nuestra tabla quedaría de la siguiente manera lo cual es mucho más factible de manejar y modificar.
+
+
+```
+
+[
+missing_data_rows <- hotel_data %>%
+  select(hotel, is_canceled, arrival_date_year, arrival_date_month, arrival_date_week_number, arrival_date_day_of_month, adults, children, babies, required_car_parking_spaces) %>%
+  filter_all(any_vars(is.na(.) | . == "NULL"))
+]
+
+```
 
 ------------
 
