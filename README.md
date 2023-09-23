@@ -31,6 +31,11 @@ Este conjunto de datos proviene del articulo titulado "Hotel booking demand data
 En la siguiente tabla se muestra el nombre de cada una de las 32 columnas que conforman el dataset, así como el tipo de dato y una breve descripción de su contenido:
 
 
+##### 1.2. Casos de uso aplicables:
+a. ¿Cuántas reservas se realizan por tipo de hotel? o  ¿Qué tipo de hotel prefiere la gente? 
+
+
+------------
 #### 2. Data base
 
 
@@ -72,11 +77,12 @@ En la siguiente tabla se muestra el nombre de cada una de las 32 columnas que co
 
 
 
+------------
 
-
+#### 3.CONCLUSIONES
 
 ------------
-BIBLIOGRAFIA
+#### 4.BIBLIOGRAFIA
 
 Antonio,N.,deAlmeida,A.,&Nunes,L. (2019).Hotelbookingdemanddatasets.Datainbrief,22,41-49.Recuperadode:
 https://doi.org/10.1016/j.dib.2018.11.126 [Consulta:03de mayodel2023]
