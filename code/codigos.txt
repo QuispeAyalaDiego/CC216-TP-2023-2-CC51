@@ -76,3 +76,41 @@ ggplot(conteo_cancelaciones, aes(x = Anio_Mes, y = Total_Cancelaciones)) +
     geom_text(aes(label = Total_Cancelaciones), vjust = -0.5, size = 3) +   labs(x = "Año y Mes", y = "Total de Cancelaciones", title = "Cancelaciones por Año y Mes") +
     theme_minimal() +
     theme(axis.text.x = element_text(angle = 90, hjust = 1))
+#####################################
+install.packages("tidyverse")
+library(tidyverse)
+#variables types
+glimpse(hotel_data)
+install.packages("tidyverse")
+library(tidyverse)
+#variables types
+glimpse(hotel_data)
+install.packages("tidyverse")
+install.packages("tidyverse")
+library(tidyverse)
+#variables types
+glimpse(hotel_data)
+hotel_data<-read.csv("C:/Users/pedro/Downloads/hotel_bookings.csv",sep = ",",stringsAsFactors = FALSE,header = TRUE)
+install.packages("tidyverse")
+library(tidyverse)
+#variables types
+glimpse(hotel_data)
+library(dplyr)
+missing_data_rows <- hotel_data %>%
+select(hotel, is_canceled, arrival_date_year, arrival_date_month, arrival_date_week_number, arrival_date_day_of_month, adults, children, babies, required_car_parking_spaces) %>%
+# Visualizar las filas con datos faltantes (NA o "NULL")
+view(missing_data_rows)
+install.packages("tidyverse")
+View(hotel_data)
+load("C:/Users/pedro/Downloads/hotel_bookings.csv")
+View(hotel_data)
+library(tidyverse)
+#variables types
+glimpse(hotel_data)
+library(dplyr)
+missing_data_rows <- hotel_data %>%
+select(hotel, is_canceled, arrival_date_year, arrival_date_month, arrival_date_week_number, arrival_date_day_of_month, adults, children, babies, required_car_parking_spaces) %>%
+# Visualizar las filas con datos faltantes (NA o "NULL")
+view(missing_data_rows)
+missing_data_rows <- hotel_data %>%
+select(hotel, is_canceled, arrival_date_year, arrival_date_month, arrival_date_week_number, arrival_date_day_of_month, adults, children, babies, required_car_parking_spaces) %>%
