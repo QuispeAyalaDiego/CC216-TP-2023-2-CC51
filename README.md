@@ -43,6 +43,7 @@ a. ¿Cuántas reservas se realizan por tipo de hotel? o  ¿Qué tipo de hotel pr
 
 ```
 b. ¿Está aumentando la demanda con el tiempo? 
+![imagen1 PNG](https://github.com/QuispeAyalaDiego/CC216-TP-2023-2-CC51/assets/103915075/feaa4a1b-2c53-435b-8900-adf7ce0f018d)
 ```
 # Crear un gráfico de barras apiladas
 ggplot(missing_data_rows_seasons, aes(x = factor(arrival_date_year), y = total_bookings, fill = estacion)) +
