@@ -292,12 +292,13 @@ Las columnas importantes para responder a las preguntas planteadas :
 Con eso dicho ahora nuestra tabla quedaría de la siguiente manera lo cual es mucho más factible de manejar y modificar.
 
 
-`` [
+```
+[
 missing_data_rows <- hotel_data %>%
   select(hotel, is_canceled, arrival_date_year, arrival_date_month, arrival_date_week_number, arrival_date_day_of_month, adults, children, babies, required_car_parking_spaces) %>%
   filter_all(any_vars(is.na(.) | . == "NULL"))
 ]
-``
+```
 
 ![imagen12](https://github.com/QuispeAyalaDiego/CC216-TP-2023-2-CC51/assets/103915075/6e50ab85-f6f9-4fed-8fb9-1493e5c7aa38)
 
@@ -457,19 +458,20 @@ Como se puede observar no se obtuvieron datos atípicos al momento de realizar e
 
 
 
-### VISUALIZAR DATOS 
+#### VISUALIZAR DATOS 
 
 - Los alumnos decidirán qué variables del dataset seleccionarán del conjunto de datos para demostrar las correlaciones existentes, y visualizarlas e inferir sus conclusiones.
 
 Para el presente proyecto utilizaremos las siguientes variables:
-``
+
+```
 "hotel"                       	        "is_canceled"                 "arrival_date_year"                   "babies"
 "arrival_date_month"                  "arrival_date_week_number"    "arrival_date_day_of_month"           "estacion"  
 "adults"                              "children"                                        
 "required_car_parking_spaces"         "has_children_or_babies"                       
 "Reservation_status_date"     
-``
-#### 3. CONCLUSIONES PRELIMINARES 
+```
+### 3. CONCLUSIONES PRELIMINARES 
 
 En conclusión los beneficiarios de este análisis llegan a ser diversas entidades, logrando abarcar desde el equipo de gestión del hotel hasta especialistas en marketing y planificadores de recursos. El equipo de gestión del hotel puede utilizar los resultados para tomar decisiones informadas sobre la ocupación y mejorar la satisfacción del cliente. Los especialistas en marketing pueden ajustar sus estrategias para atraer a diferentes segmentos de mercado, mientras que los planificadores de recursos podrían optimizar la gestión de habitaciones y servicios en función de la demanda histórica y las preferencias de los huéspedes. En resumen, estos datos ofrecen una base sólida para la toma de decisiones en la industria hotelera y áreas relacionadas.
 
@@ -481,6 +483,6 @@ En conclusión los beneficiarios de este análisis llegan a ser diversas entidad
 - f) De la sexta pregunta se logra concluir que las personas no requieren un espacio de estacionamiento, por lo que se recomienda no invertir en una gran cantidad de estas zonas.
 - g) Se llega a concluir de la última pregunta que en los meses de enero se genera una mayor cantidad de cancelaciones de hotel, mostrando un pico de 2616 cancelaciones en el año de 2017.
 
-#### 4 Bibliografia
+### 4 Bibliografia
 
 Antonio,N.,deAlmeida,A.,&Nunes,L.(2019).Hotelbookingdemanddatasets.Datainbrief,22,41-49.Recuperado de:https://doi.org/10.1016/j.dib.2018.11.126  (Consulta:03 de septiembre del 2023)
