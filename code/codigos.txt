@@ -77,40 +77,93 @@ ggplot(conteo_cancelaciones, aes(x = Anio_Mes, y = Total_Cancelaciones)) +
     theme_minimal() +
     theme(axis.text.x = element_text(angle = 90, hjust = 1))
 #####################################
-install.packages("tidyverse")
+
+#Limpieza de datos
 library(tidyverse)
-#variables types
-glimpse(hotel_data)
-install.packages("tidyverse")
-library(tidyverse)
-#variables types
-glimpse(hotel_data)
-install.packages("tidyverse")
-install.packages("tidyverse")
-library(tidyverse)
-#variables types
-glimpse(hotel_data)
-hotel_data<-read.csv("C:/Users/pedro/Downloads/hotel_bookings.csv",sep = ",",stringsAsFactors = FALSE,header = TRUE)
-install.packages("tidyverse")
-library(tidyverse)
-#variables types
-glimpse(hotel_data)
 library(dplyr)
+
+
+
+
+hotel_data <- read.csv("C:/Users/pedro/Downloads/hotel_bookings.csv")
+
+
 missing_data_rows <- hotel_data %>%
-select(hotel, is_canceled, arrival_date_year, arrival_date_month, arrival_date_week_number, arrival_date_day_of_month, adults, children, babies, required_car_parking_spaces) %>%
+  select(hotel, is_canceled, arrival_date_year, arrival_date_month, arrival_date_week_number, arrival_date_day_of_month, adults, children, babies,reservation_status_date, required_car_parking_spaces,)
+ 
 # Visualizar las filas con datos faltantes (NA o "NULL")
 view(missing_data_rows)
-install.packages("tidyverse")
-View(hotel_data)
-load("C:/Users/pedro/Downloads/hotel_bookings.csv")
-View(hotel_data)
-library(tidyverse)
-#variables types
-glimpse(hotel_data)
-library(dplyr)
-missing_data_rows <- hotel_data %>%
-select(hotel, is_canceled, arrival_date_year, arrival_date_month, arrival_date_week_number, arrival_date_day_of_month, adults, children, babies, required_car_parking_spaces) %>%
-# Visualizar las filas con datos faltantes (NA o "NULL")
-view(missing_data_rows)
-missing_data_rows <- hotel_data %>%
-select(hotel, is_canceled, arrival_date_year, arrival_date_month, arrival_date_week_number, arrival_date_day_of_month, adults, children, babies, required_car_parking_spaces) %>%
+
+
+missing_data_rows$children[is.na(missing_data_rows$children)] <- 0
+
+missing_data_rows$has_children_or_babies <- ifelse(hotel_data$children > 0 | hotel_data$babies > 0, 1, 0)
+
+
+
+
+
+#------------
+# Calcular el número de reservas de estación y año
+# Definir estaciones y meses asociados
+estaciones <- c("Invierno", "Primavera", "Verano", "Otoño")
+
+# Meses por cada estación
+meses_estaciones <- data.frame(
+  mes = tolower(c("January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December")),
+  estacion = c("Invierno", "Invierno", "Primavera", "Primavera", "Primavera", "Verano", "Verano", "Verano", "Otoño", "Otoño", "Otoño", "Invierno")
+)
+
+# Convertir los nombres de los meses en minúscula en missing_data_rows
+missing_data_rows <- missing_data_rows %>%
+  mutate(arrival_date_month = tolower(arrival_date_month))
+
+# Asignar estaciones por cada mes en missing_data_rows
+missing_data_rows <- missing_data_rows %>%
+  left_join(meses_estaciones, by = c("arrival_date_month" = "mes"))
+
+# Calcular el número de reservas por estación y año en missing_data_rows
+missing_data_rows_seasons <- missing_data_rows %>%
+  group_by(estacion, arrival_date_year) %>%
+  summarise(total_bookings = n())
+
+# Crear un dataframe con todas las combinaciones de estaciones y años
+all_combinations <- expand.grid(estacion = estaciones, arrival_date_year = unique(missing_data_rows$arrival_date_year))
+
+# Combinar con los datos reales y rellenar valores faltantes con ceros
+missing_data_rows_seasons <- all_combinations %>%
+  left_join(missing_data_rows_seasons, by = c("estacion", "arrival_date_year")) %>%
+  mutate(total_bookings = replace_na(total_bookings, 0))
+
+# Calcular estadísticas resumen (media) para cada estación
+summary_stats <- missing_data_rows_seasons %>%
+  group_by(estacion) %>%
+  summarise(avg_total_bookings = mean(total_bookings))
+
+# Definir umbrales para reservas bajas, medias y altas (ajusta los valores según tus criterios)
+umbral_bajo <- quantile(summary_stats$avg_total_bookings, 0.33)
+umbral_alto <- quantile(summary_stats$avg_total_bookings, 0.67)
+
+# Clasificar las estaciones en categorías en summary_stats
+summary_stats <- summary_stats %>%
+  mutate(categoria = case_when(
+    avg_total_bookings < umbral_bajo ~ "Bajas",
+    avg_total_bookings >= umbral_bajo & avg_total_bookings < umbral_alto ~ "Medias",
+    avg_total_bookings >= umbral_alto ~ "Altas"
+  ))
+
+#----------
+
+
+# total_bookings sea numérico
+missing_data_rows_seasons$total_bookings <- as.numeric(missing_data_rows_seasons$total_bookings)
+
+#identificar outliers
+boxplot(missing_data_rows_seasons$total_bookings, main = "Reservas Totales", boxwex = 0.5)
+
+# Identifica los valores atípicos
+outliers.values <- boxplot(missing_data_rows_seasons$total_bookings)$out
+
+# Muestra los valores atípicos
+outliers.values
+
