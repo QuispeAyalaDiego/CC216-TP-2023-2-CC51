@@ -338,35 +338,135 @@ Verano(Junio, Julio, Agosto)
 Otoño(Setiembre, Octubre, Noviembre)
 Codigo en cuestion:
 
-
-
-`` # Convertir los nombres de los meses en minúscula en missing_data_rows
+``#Convertir los nombres de los meses en minúscula en missing_data_rows
 missing_data_rows <- missing_data_rows %>%
   mutate(arrival_date_month = tolower(arrival_date_month))
-
-# Asignar estaciones por cada mes en missing_data_rows
+``
+``#Asignar estaciones por cada mes en missing_data_rows
 missing_data_rows <- missing_data_rows %>%
   left_join(meses_estaciones, by = c("arrival_date_month" = "mes"))
+``
 
-# Calcular el número de reservas por estación y año en missing_data_rows
+``# Calcular el número de reservas por estación y año en missing_data_rows
 missing_data_rows_seasons <- missing_data_rows %>%
   group_by(estacion, arrival_date_year) %>%
   summarise(total_bookings = n())
+``
 
-# Crear un dataframe con todas las combinaciones de estaciones y años
+``# Crear un dataframe con todas las combinaciones de estaciones y años
 all_combinations <- expand.grid(estacion = estaciones, arrival_date_year = unique(missing_data_rows$arrival_date_year))
+``
 
-# Combinar con los datos reales y rellenar valores faltantes con ceros
+``# Combinar con los datos reales y rellenar valores faltantes con ceros
 missing_data_rows_seasons <- all_combinations %>%
   left_join(missing_data_rows_seasons, by = c("estacion", "arrival_date_year")) %>%
   mutate(total_bookings = replace_na(total_bookings, 0))
+``
 
-# Calcular estadísticas resumen (media) para cada estación
+``# Calcular estadísticas resumen (media) para cada estación
 summary_stats <- missing_data_rows_seasons %>%
-  group_by(estacion) %>%
-  summarise(avg_total_bookings = mean(total_bookings))``
+  group_by(estacion) %>%  summarise(avg_total_bookings = mean(total_bookings))
+``
+
+
+
 
   ![imagen16](https://github.com/QuispeAyalaDiego/CC216-TP-2023-2-CC51/assets/103915075/6a11e091-77fd-4504-9433-59e0dc56ca81)
 
+  Asociación de Meses a Estaciones:
+Se creó un dataframe llamado `meses_estaciones` en el cual se relacionaron los nombres de los meses con sus respectivas estaciones. Esto permitió asignar una estación a cada mes del año.
+
+
+![imagen17](https://github.com/QuispeAyalaDiego/CC216-TP-2023-2-CC51/assets/103915075/4f260aee-1a8a-42cd-904a-fbf53ab24ba7)
+
+Se convirtieron los nombres de los meses en minúscula en el conjunto de datos principal (`missing_data_rows`) para asegurar la coherencia en las asignaciones de estaciones.
+
+Asignación de Estaciones a los Registros
+Se asignaron estaciones a cada registro en el conjunto de datos principal mediante una operación de unión (join) con el dataframe `meses_estaciones`. Esto se logró utilizando los nombres de los meses como clave de unión.
+
+
+![imagen18](https://github.com/QuispeAyalaDiego/CC216-TP-2023-2-CC51/assets/103915075/25af898b-3bc3-41be-b297-52ef8a1895da)
+
+Cálculo del Número de Reservas por Estación y Año
+Los datos en `missing_data_rows` se agruparon por estación y año utilizando la función `group_by`. Luego, se calculó el número total de reservas (denominado `total_bookings`) en cada grupo mediante `summarise`. Los resultados se almacenaron en un nuevo dataframe llamado `missing_data_rows_seasons`.
+
+Después generó un dataframe denominado `all_combinations` que contenía todas las combinaciones posibles de estaciones y años. Esto se logró tomando como base los valores únicos de años presentes en `missing_data_rows`. 
+
+Finalmente se combinaron los datos de `all_combinations` con `missing_data_rows_seasons` mediante un "left_join," asegurando así que todas las combinaciones estuvieran presentes. Además, se rellenaron los valores faltantes de `total_bookings` con ceros.
+![imagen19](https://github.com/QuispeAyalaDiego/CC216-TP-2023-2-CC51/assets/103915075/b2083744-3de4-443c-9132-cdf28de0fcff)
+
+Finalmente, se calculó la estadística resumen, que consistió en determinar el promedio (media) de `total_bookings` para cada estación en el dataframe `missing_data_rows_seasons`. Los resultados se recopilaron en un nuevo dataframe llamado `summary_stats`.
+Este análisis proporciona una visión detallada de cómo se distribuyen las reservas de hotel a lo largo de las estaciones y los años, lo que puede ser valioso para la toma de decisiones y la planificación estratégica en la industria hotelera.
+![imagen20](https://github.com/QuispeAyalaDiego/CC216-TP-2023-2-CC51/assets/103915075/8b4a1291-b840-4f0d-99ba-cce5c660e74d)
+Determinación de Umbrales:
+
+Para la determinación de los umbrales en cuestión se decidió el uso de percentiles para definir la cantidad total de reservaciones de la siguiente manera.
+
+`` # Definir umbrales para reservas bajas, medias y altas 
+umbral_bajo <- quantile(summary_stats$avg_total_bookings, 0.33)
+umbral_alto <- quantile(summary_stats$avg_total_bookings, 0.67)
+``
+
+`` # Clasificar las estaciones en categorías en summary_stats
+summary_stats <- summary_stats %>%
+  mutate(categoria = case_when(
+    avg_total_bookings < umbral_bajo ~ "Bajas",
+    avg_total_bookings >= umbral_bajo & avg_total_bookings < umbral_alto ~ "Medias",
+    avg_total_bookings >= umbral_alto ~ "Altas"
+  ))
+``
+Este código nos permitirá segmentar las estaciones en tres categorías distintas ("Bajas," "Medias" y "Altas") en función de su desempeño en términos de promedio de reservas de hotel, así mismo se tomó . Esto facilitará la interpretación y el análisis de cómo se distribuyen las estaciones en diferentes niveles de demanda, lo que puede ser útil para la toma de decisiones y la planificación en la industria hotelera.
+
+El código que has proporcionado te permitirá realizar una clasificación de las estaciones en categorías en función del promedio de reservas de hotel por estación. A continuación, te explico en detalle lo que hace cada parte del código:
+
+Definición de Umbrales:
+ Umbral_bajo: se calcula como el percentil 33 (1/3) del promedio de reservas (`avg_total_bookings`) en `summary_stats`. Este valor representa el límite inferior para categorizar las estaciones como "Bajas".
+
+  `Umbral_alto : se calcula como el percentil 67 (2/3) del promedio de reservas en `Summary_stats`. Este valor representa el límite superior para categorizar las estaciones como “Altas”
+
+
+is_canceled:
+
+En nuestro caso requerimos saber si la reserva ha sido cancelada o si ha sido reservada con éxito, al principio los valores contenidos se encontraban como tipo numérico, lo cual no es precisamente exacto cuando tratamos de hacer uso de valores de valores Booleanos como verdadero o falso. Por lo que se decidió transformarlo en un factor para poder analizarlo de una manera más adecuada.
+![imagen21](https://github.com/QuispeAyalaDiego/CC216-TP-2023-2-CC51/assets/103915075/bca99875-53ee-4171-bc0f-ff408aeca599)
+
+Requiered_car_parking_spaces y Reservation_status_date:
+
+Para los espacios de estacionamiento requerimos saber cuántas familias han pedido que la reserva venga con al menos un estacionamiento y las que no desean el estacionamiento, por lo que no es conveniente hacer uso de algún tipo de cambio para esta variable para responder la pregunta.
+Lo mismo pasa con el estado de la fecha de estado de reserva, puesto que nos conviene que esté de esa manera, ya que nos conviene para responder la pregunta en el análisis respectivo.
+		
+
+
+
+
+
+Identificacion de Datos Atipicos:
+
+
+
+Primero que todo debido a la cantidad reducida de datos con los cuales estamos trabajando y siendo esto en su mayoría de valores que no son muy cambiantes, así mismo contando con una columna con valores propiamente numéricos, es muy probable que no haya outliers en los actos con los cuales estamos trabajando.
+
+Con esto en mente se decidió  la limpieza de  la variable total booking haciendo un box plot para identificar si hay algún outliers, a su vez verificando que los total_bookings sean atípicos. 
+
+![imagen22](https://github.com/QuispeAyalaDiego/CC216-TP-2023-2-CC51/assets/103915075/36b64d69-5178-4ead-8800-0fad6c61f529)
+
+![imagen23](https://github.com/QuispeAyalaDiego/CC216-TP-2023-2-CC51/assets/103915075/0924dc5f-cbcc-4f38-8487-b3310349c826)
+
+Como se puede observar no se obtuvieron datos atípicos al momento de realizar el análisis de los datos por lo que se puede analizar estos valores sin esperar un problema de sesgo.
+
+
+
+
+###3.4  VISUALIZAR DATOS 
+
+- Los alumnos decidirán qué variables del dataset seleccionarán del conjunto de datos para demostrar las correlaciones existentes, y visualizarlas e inferir sus conclusiones.
+
+Para el presente proyecto utilizaremos las siguientes variables:
+
+"hotel"                       	        "is_canceled"                 "arrival_date_year"                   "babies"
+"arrival_date_month"                  "arrival_date_week_number"    "arrival_date_day_of_month"           "estacion"  
+"adults"                              "children"                                        
+"required_car_parking_spaces"         "has_children_or_babies"                       
+"Reservation_status_date"     
 
 
