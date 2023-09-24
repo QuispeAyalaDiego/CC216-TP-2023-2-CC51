@@ -462,24 +462,24 @@ Como se puede observar no se obtuvieron datos atípicos al momento de realizar e
 - Los alumnos decidirán qué variables del dataset seleccionarán del conjunto de datos para demostrar las correlaciones existentes, y visualizarlas e inferir sus conclusiones.
 
 Para el presente proyecto utilizaremos las siguientes variables:
-
+``
 "hotel"                       	        "is_canceled"                 "arrival_date_year"                   "babies"
 "arrival_date_month"                  "arrival_date_week_number"    "arrival_date_day_of_month"           "estacion"  
 "adults"                              "children"                                        
 "required_car_parking_spaces"         "has_children_or_babies"                       
 "Reservation_status_date"     
-
+``
 #### 3. CONCLUSIONES PRELIMINARES 
 
 En conclusión los beneficiarios de este análisis llegan a ser diversas entidades, logrando abarcar desde el equipo de gestión del hotel hasta especialistas en marketing y planificadores de recursos. El equipo de gestión del hotel puede utilizar los resultados para tomar decisiones informadas sobre la ocupación y mejorar la satisfacción del cliente. Los especialistas en marketing pueden ajustar sus estrategias para atraer a diferentes segmentos de mercado, mientras que los planificadores de recursos podrían optimizar la gestión de habitaciones y servicios en función de la demanda histórica y las preferencias de los huéspedes. En resumen, estos datos ofrecen una base sólida para la toma de decisiones en la industria hotelera y áreas relacionadas.
 
-a) Respecto a la primera pregunta se logra concluir que las personas prefieren realizar una reserva en el hotel City Hotel, este análisis nos sirve a futuro para poder saber qué hotel es el más valorado por los visitantes.
-b) En la segunda pregunta se puede observar que durante el primer y segundo año, hubo un incremento considerado de las reservas; pero, tras el segundo y tercer año, hubo un declive considerado, por lo que se puede concluir que las cantidades de reservas a futuro llegarán a disminuir, pero aún habrá reservas considerables.
-c) Se llega a concluir en la tercera pregunta que los meses posteriores al invierno generan una mayor demanda de reservas.
-d) Lo concluido en la cuarta pregunta, es que durante los meses que contempla el invierno las reservas decaen considerablemente para ambos hoteles, por lo que se recomienda que en las temporadas altas el costo de reserva incremente, gracias a la alta demanda.
-e) En la quinta pregunta se logra evidenciar que las personas que realizan reservas en los distintos hoteles no acuden a este con algún niño. En conclusión es mejor destinar los recursos de los hoteles a un mejor entretenimiento para el público mayor.
-f) De la sexta pregunta se logra concluir que las personas no requieren un espacio de estacionamiento, por lo que se recomienda no invertir en una gran cantidad de estas zonas.
-g) Se llega a concluir de la última pregunta que en los meses de enero se genera una mayor cantidad de cancelaciones de hotel, mostrando un pico de 2616 cancelaciones en el año de 2017.
+- a) Respecto a la primera pregunta se logra concluir que las personas prefieren realizar una reserva en el hotel City Hotel, este análisis nos sirve a futuro para poder saber qué hotel es el más valorado por los visitantes.
+- b) En la segunda pregunta se puede observar que durante el primer y segundo año, hubo un incremento considerado de las reservas; pero, tras el segundo y tercer año, hubo un declive considerado, por lo que se puede concluir que las cantidades de reservas a futuro llegarán a disminuir, pero aún habrá reservas considerables.
+- c) Se llega a concluir en la tercera pregunta que los meses posteriores al invierno generan una mayor demanda de reservas.
+- d) Lo concluido en la cuarta pregunta, es que durante los meses que contempla el invierno las reservas decaen considerablemente para ambos hoteles, por lo que se recomienda que en las temporadas altas el costo de reserva incremente, gracias a la alta demanda.
+- e) En la quinta pregunta se logra evidenciar que las personas que realizan reservas en los distintos hoteles no acuden a este con algún niño. En conclusión es mejor destinar los recursos de los hoteles a un mejor entretenimiento para el público mayor.
+- f) De la sexta pregunta se logra concluir que las personas no requieren un espacio de estacionamiento, por lo que se recomienda no invertir en una gran cantidad de estas zonas.
+- g) Se llega a concluir de la última pregunta que en los meses de enero se genera una mayor cantidad de cancelaciones de hotel, mostrando un pico de 2616 cancelaciones en el año de 2017.
 
 #### 4 Bibliografia
 
