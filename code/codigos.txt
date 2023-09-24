@@ -1,10 +1,10 @@
-//verificar cantidad de cancelaciones por mes
+//##################################### cantidad de cancelaciones por mes
 > cancelaciones_por_mes <- data %>%
 +     group_by(arrival_date_month) %>%
 +     summarise(total_cancelaciones = sum(is_canceled))
 > View(cancelaciones_por_mes)
 > cancelaciones_por_mes<-cancelaciones_por_mes %>% arrange(desc(total_cancelaciones))
-////////////////////////////////////////////////////
+#####################################
 //verificar cantidad de reservas sin cancelaciones por hotel
 > sum(data$hotel=="City Hotel"& data$is_canceled==0)
 [1] 46228
@@ -12,9 +12,67 @@
 [1] 28938
 > sum(data$is_canceled==0)
 [1] 75166
-////////////////////////////////////////////////////
+#####################################
 //verificar cuantas reservas tienen niño o bebe
 > reservas_con_ninos <- data %>%
 +     filter(children > 0 | babies > 0)
 > View(reservas_con_ninos)
 > cantidad_reservas_con_ninos <- nrow(reservas_con_ninos)
+> sum(missing_data_rows$hotel=="Resort Hotel"&missing_data_rows$is_canceled==0)
+[1] 28938
+> sum(missing_data_rows$hotel=="City Hotel"&missing_data_rows$is_canceled==0)
+[1] 46228
+> sum(missing_data_rows$is_canceled==0)
+[1] 75166
+#####################################
+# Crear un gráfico de barras apiladas
+ggplot(missing_data_rows_seasons, aes(x = factor(arrival_date_year), y = total_bookings, fill = estacion)) +
+    geom_bar(stat = "identity") +
+    labs(x = "Año", y = "Número de Reservas", title = "Número de Reservas por Estación y Año") +
+    scale_fill_manual(values = c("Invierno" = "blue", "Primavera" = "green", "Verano" = "orange", "Otoño" = "red")) +
+    theme_minimal()
+#####################################
+ggplot(missing_data_rows_seasons, aes(x = factor(arrival_date_year), y = total_bookings, fill = estacion)) +
+    geom_bar(stat = "identity", position = "stack") +
+    labs(x = "Año", y = "Número de Reservas", title = "Resumen de Reservas por Estación y Año") +
+    scale_fill_manual(values = c("Invierno" = "blue", "Primavera" = "green", "Verano" = "yellow", "Otoño" = "red")) +
+    theme_minimal() +
+    facet_wrap(~estacion, ncol = 4) # Facetado por estación
+#####################################
+ggplot(missing_data_rows_seasons, aes(x = estacion, y = total_bookings, fill = estacion)) +
+    geom_bar(stat = "identity") +
+    labs(x = "Estación", y = "Número de Reservas", title = "Resumen de Reservas por Estación") +
+    scale_fill_manual(values = c("Invierno" = "blue", "Primavera" = "green", "Verano" = "yellow", "Otoño" = "red")) +
+    theme_minimal()
+#####################################
+pie(conteo_bebes, labels = c("No tiene niño o bebe", "Tiene niño o bebe"), col = c("chartreuse1", "darkturquoise")	
+#####################################
+# Filtrar los datos para obtener personas que no han cancelado (0)
+personas_no_canceladas <- missing_data_rows[missing_data_rows$is_canceled == 0, ]
+# Crear un dataframe para el gráfico
+df_grafico <- data.frame(
+Grupo = c("Necesitaron Estacionamiento", "No Necesitaron Estacionamiento"),
+Suma_Estacionamiento = c(sum(personas_no_canceladas$required_car_parking_spaces > 0),
+sum(personas_no_canceladas$required_car_parking_spaces == 0))
+)
+# Crear el gráfico de barras
+ggplot(df_grafico, aes(x = Grupo, y = Suma_Estacionamiento, fill = Grupo)) +
+geom_bar(stat = "identity") +
+labs(x = "Grupo", y = "Suma de Estacionamiento", title = "Comparación de Espacios de Estacionamiento Solicitados") +
+scale_fill_manual(values = c("Necesitaron Estacionamiento" = "blue", "No Necesitaron Estacionamiento" = "red")) +
+theme_minimal()
+#####################################
+missing_data_rows$reservation_status_date <- as.Date(missing_data_rows$reservation_status_date)
+
+datos <- missing_data_rows %>%
+    mutate(Anio_Mes = format(reservation_status_date, "%Y-%m"))
+
+cancelaciones <- missing_data_rows %>% filter(is_canceled == 1)
+
+conteo_cancelaciones <- cancelaciones %>% group_by(Anio_Mes) %>% summarize(Total_Cancelaciones = n())
+
+ggplot(conteo_cancelaciones, aes(x = Anio_Mes, y = Total_Cancelaciones)) +
+    geom_bar(stat = "identity", fill = "blue") +
+    geom_text(aes(label = Total_Cancelaciones), vjust = -0.5, size = 3) +   labs(x = "Año y Mes", y = "Total de Cancelaciones", title = "Cancelaciones por Año y Mes") +
+    theme_minimal() +
+    theme(axis.text.x = element_text(angle = 90, hjust = 1))
