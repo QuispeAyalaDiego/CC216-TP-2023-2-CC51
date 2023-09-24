@@ -42,10 +42,27 @@ a. ¿Cuántas reservas se realizan por tipo de hotel? o  ¿Qué tipo de hotel pr
 [1] 75166
 
 ```
-b. ¿Está aumentando la demanda con el tiempo? 
-![imagen1 PNG](https://github.com/QuispeAyalaDiego/CC216-TP-2023-2-CC51/assets/103915075/feaa4a1b-2c53-435b-8900-adf7ce0f018d)
+- Acorde a los datos obtenidos, las personas que realizaron la reserva de cada hotel y no la cancelaron fueron las siguientes:
 
-![imagen2](https://github.com/QuispeAyalaDiego/CC216-TP-2023-2-CC51/assets/103915075/1a051b69-d088-4d82-ba28-e3873311f8e6)
+
+| NOMBRE DEL HOTEL         | RESERVAS REALIZADAS SIN CANCELACIÓN |
+| ------------------------ | ---------------------------------- |
+| CITY HOTEL               | 46,228                             |
+| RESORT HOTEL             | 28,938                             |
+
+
+
+
+
+- A partir de estos datos se puede corroborar que el hotel que las personas prefieren es el City Hotel, con una diferencia de 17290 reservas
+
+
+
+b. ¿Está aumentando la demanda con el tiempo? 
+
+
+
+
 ```
 # Crear un gráfico de barras apiladas
 ggplot(missing_data_rows_seasons, aes(x = factor(arrival_date_year), y = total_bookings, fill = estacion)) +
@@ -55,22 +72,35 @@ ggplot(missing_data_rows_seasons, aes(x = factor(arrival_date_year), y = total_b
     theme_minimal()
 
 ```
+En la siguiente gráfica y tabla hemos agrupado la cantidad de reservas realizadas, por estación y por año, para una mejor visualización de las temporadas altas y bajas.
+
+
+![imagen2](https://github.com/QuispeAyalaDiego/CC216-TP-2023-2-CC51/assets/103915075/1a051b69-d088-4d82-ba28-e3873311f8e6)
+Figura 2.
+
+A partir de las tablas y el gráfico de barras podemos concluir que la demanda “no” está aumentando a lo largo del tiempo, en el año 2015,2016,2016 hubieron 21996,56707,40687 reservas respectivamente.
+
 
 c. ¿Cuándo se producen las temporadas de reservas: alta, media y baja? 
-![imagen3](https://github.com/QuispeAyalaDiego/CC216-TP-2023-2-CC51/assets/103915075/0556e48c-33d8-4e92-8a02-d026aaa3adbf)
+
+
+
+
+
 ```
- # Crear un gráfico de barras facetado por estación
-ggplot(missing_data_rows_seasons, aes(x = factor(arrival_date_year), y = total_bookings, fill = estacion)) +
+ # ggplot(missing_data_rows_seasons, aes(x = factor(arrival_date_year), y = total_bookings, fill = estacion)) +
     geom_bar(stat = "identity", position = "stack") +
     labs(x = "Año", y = "Número de Reservas", title = "Resumen de Reservas por Estación y Año") +
     scale_fill_manual(values = c("Invierno" = "blue", "Primavera" = "green", "Verano" = "yellow", "Otoño" = "red")) +
     theme_minimal() +
     facet_wrap(~estacion, ncol = 4) # Facetado por estación
 
-
 ```
+![imagen3](https://github.com/QuispeAyalaDiego/CC216-TP-2023-2-CC51/assets/103915075/0556e48c-33d8-4e92-8a02-d026aaa3adbf)
+Con el gráfico y los datos obtenidos podemos concluir que las temporadas más bajas son las que están en invierno, las medias son las que están en primavera y finalmente las de verano son las temporadas más altas en cuanto al número de reservas.
+
 d. ¿Cuándo es menor la demanda de reservas? 
-![imagen4](https://github.com/QuispeAyalaDiego/CC216-TP-2023-2-CC51/assets/103915075/f1d73d30-075e-4ea6-a778-df6c4be8addd)
+
 ```
 # Crear un gráfico de barras de la cantidad total de reservas por estación
 ggplot(missing_data_rows_seasons, aes(x = estacion, y = total_bookings, fill = estacion)) +
@@ -80,18 +110,22 @@ ggplot(missing_data_rows_seasons, aes(x = estacion, y = total_bookings, fill = e
     theme_minimal()
 
 ```
+![imagen4](https://github.com/QuispeAyalaDiego/CC216-TP-2023-2-CC51/assets/103915075/f1d73d30-075e-4ea6-a778-df6c4be8addd)
+
+En este gráfico se puede observar que las estaciones con la peor demanda en el Hotel es la estación de invierno.
 
 e. ¿Cuántas reservas incluyen niños y/o bebes? 
-![imagen5](https://github.com/QuispeAyalaDiego/CC216-TP-2023-2-CC51/assets/103915075/42ee296f-a05d-4bac-a155-6eacd60b4945)
+
 ```
 pie(conteo_bebes, labels = c("No tiene niño o bebe", "Tiene niño o bebe"), col = c("chartreuse1", "darkturquoise")	
 
 
 ```
-
+![imagen5](https://github.com/QuispeAyalaDiego/CC216-TP-2023-2-CC51/assets/103915075/42ee296f-a05d-4bac-a155-6eacd60b4945)
+Verificando la cantidad de reservas que tuvieron un niño o bebé como huésped, se puede visualizar que fueron 9332
 
 f. ¿Es importante contar con espacios de estacionamiento?
-![imagen6](https://github.com/QuispeAyalaDiego/CC216-TP-2023-2-CC51/assets/103915075/7e77dcad-953a-4cf6-a118-95908f2bb283)
+
 ```
 # Filtrar los datos para obtener personas que no han cancelado (0)
 personas_no_canceladas <- missing_data_rows[missing_data_rows$is_canceled == 0, ]
@@ -108,8 +142,11 @@ labs(x = "Grupo", y = "Suma de Estacionamiento", title = "Comparación de Espaci
 scale_fill_manual(values = c("Necesitaron Estacionamiento" = "blue", "No Necesitaron Estacionamiento" = "red")) +
 theme_minimal()
 ```
+![imagen6](https://github.com/QuispeAyalaDiego/CC216-TP-2023-2-CC51/assets/103915075/7e77dcad-953a-4cf6-a118-95908f2bb283)
+Según lo visto en la anterior gráfica podemos observar que no es necesario contar con espacios de estacionamiento. De las 75166 reservas, solo 7416 pidieron que esta disponga de al menos un estacionamiento.
+
 g. ¿En qué meses del año se producen más cancelaciones de reservas?
-![imagen7](https://github.com/QuispeAyalaDiego/CC216-TP-2023-2-CC51/assets/103915075/03287359-fdf7-42a8-8c95-319e540ac3fc)
+
 ```
 # Convertir la columna 'reservation_status_date' a formato de fecha 
 missing_data_rows$reservation_status_date <-as.Date(missing_data_rows$reservation_status_date)
@@ -136,9 +173,19 @@ ggplot(conteo_cancelaciones, aes(x = Mes, y = Cantidad)) +
 
 
 ```
+![imagen7](https://github.com/QuispeAyalaDiego/CC216-TP-2023-2-CC51/assets/103915075/03287359-fdf7-42a8-8c95-319e540ac3fc)
+Figura 7.
+En el siguiente gráfico se puede apreciar que durante el mes de enero del año 2017 se concentró la mayor cantidad de cancelaciones, con un valor de 2616.
+
+
+
 
 ------------
 #### 2. Data base
+
+Descripción de la estructura de los datos (tabla conteniendo la estructura y descripción de cada uno de los datos).
+
+En la siguiente tabla se muestra el nombre de cada una de las 32 columnas que conforman el dataset, así como el tipo de dato y una breve descripción de su contenido:
 
 
 
@@ -178,8 +225,24 @@ ggplot(conteo_cancelaciones, aes(x = Mes, y = Cantidad)) +
 | 32                           | reservation_status_date | Fecha (date) | Fecha del estado de la reserva.       |
 
 
+#### ANÁLISIS EXPLORATORIO DE DATOS
+##### CARGAR DATOS  
 
-#### PRE-PROCESAR DATOS 
+``
+url<-"C:/Users/Proyecto/Downloads/hotel_bookings.csv"
+ datos<-read.csv(url,sep = ",",header = TRUE,stringsAsFactors = FALSE)
+ View(datos) ``
+
+![imagen8](https://github.com/QuispeAyalaDiego/CC216-TP-2023-2-CC51/assets/103915075/35d3139c-e117-4b5f-b5b3-2450bff62de9)
+
+
+##### INSPECCIONAR DATOS
+![imagen9](https://github.com/QuispeAyalaDiego/CC216-TP-2023-2-CC51/assets/103915075/f613d2a5-7e4c-4605-9a0c-3a5b75c901c0)
+
+![imagen10](https://github.com/QuispeAyalaDiego/CC216-TP-2023-2-CC51/assets/103915075/5a10328a-f458-4aca-8b90-bdc73e01661a)
+
+
+##### PRE-PROCESAR DATOS 
 
 - Identificar datos faltantes o NA:
 
@@ -188,35 +251,32 @@ Para identificar los datos faltantes, procedimos a realizar un proceso de filtra
 
 Adicionalmente, se observó que varias columnas presentan valores iguales a cero. En este sentido, se plantea la necesidad de considerar si es pertinente llevar a cabo una limpieza de datos en estas columnas o, en caso contrario, eliminarlas en caso de que no sean relevantes para las interrogantes planteadas en el análisis exploratorio de los datos.
 
-A continuación, se presenta el fragmento de código y el gráfico correspondiente
+A continuación, se presenta el fragmento de código y el gráfico correspondiente:
 
 
-
-
-```
+``
 [
 missing_data_rows <- hotel_data %>%
 select(hotel,is_canceled,lead_time,arrival_date_year,arrival_date_month,arrival_date_week_number,arrival_date_day_of_month,stays_in_weekend_nights,stays_in_week_nights,adults,children,babies,meal,country,market_segment,distribution_channel,is_repeated_guest,previous_cancellations,previous_bookings_not_canceled,reserved_room_type,assigned_room_type,booking_changes,deposit_type,agent,company,days_in_waiting_list,customer_type,adr,required_car_parking_spaces,total_of_special_requests,reservation_status,reservation_status_date) %>%
   filter_all(any_vars(is.na(.) | . == "NULL"))
 ]
-
-```
+``
+![imagen11](https://github.com/QuispeAyalaDiego/CC216-TP-2023-2-CC51/assets/103915075/ae6f4125-75f1-4f20-aa70-12b425980530)
 
 Con estos datos se procederá a elegir la información pertinente antes de ver que tipo de eliminación se debería realizar a los valores NA o NULL.
 
 
-### Explicación de las técnicas utilizadas para eliminar o completar los datos faltantes:
+#### Explicación de las técnicas utilizadas para eliminar o completar los datos faltantes:
 
 En cuanto a la selección de los datos, se nos plantea la tarea de responder un conjunto de preguntas para hacer un análisis exploratorio de los datos. Estas respuestas denotan la necesidad de que ciertas columnas estén pre procesadas de manera correcta y de igual manera sean pertinentes para este caso.
 Es evidente que debemos reducir la cantidad de características (columnas) disponibles. Esto es debido a que algunas variables no contribuyen de manera significativa al análisis de los datos que estamos buscando obtener independientemente de si tienen valores NA o no.
 
-
 Las columnas importantes para responder a las preguntas planteadas :
 
 
-  -`hotel`: Permite distinguir entre "Resort Hotel" y "City Hotel" para analizar el tipo de hotel y las preferencias de los clientes.
+-`hotel`: Permite distinguir entre "Resort Hotel" y "City Hotel" para analizar el tipo de hotel y las preferencias de los clientes.
 
-   -`is_canceled`: Necesaria para identificar las cancelaciones de reservas.
+ -`is_canceled`: Necesaria para identificar las cancelaciones de reservas.
 
  -`arrival_date_year`, `arrival_date_month`, `arrival_date_day_of_month`: Estas columnas son esenciales para analizar la demanda a lo largo del tiempo y para identificar las temporadas de reservas.
 
@@ -224,6 +284,7 @@ Las columnas importantes para responder a las preguntas planteadas :
 -`adults`, `children` y `babies`: Permiten determinar cuántas reservas incluyen niños y/o bebés.
 
  -`required_car_parking_spaces`: Es relevante para evaluar la importancia de los espacios de estacionamiento.
+-`reservation_status_date`: Nos permitirá evaluar las fechas en las cuales se realizaron las reservaciones.
 
 
 
@@ -231,38 +292,81 @@ Las columnas importantes para responder a las preguntas planteadas :
 Con eso dicho ahora nuestra tabla quedaría de la siguiente manera lo cual es mucho más factible de manejar y modificar.
 
 
-```
-
-[
+`` [
 missing_data_rows <- hotel_data %>%
   select(hotel, is_canceled, arrival_date_year, arrival_date_month, arrival_date_week_number, arrival_date_day_of_month, adults, children, babies, required_car_parking_spaces) %>%
   filter_all(any_vars(is.na(.) | . == "NULL"))
 ]
+``
 
-```
+![imagen12](https://github.com/QuispeAyalaDiego/CC216-TP-2023-2-CC51/assets/103915075/6e50ab85-f6f9-4fed-8fb9-1493e5c7aa38)
 
-------------
 
-#### 3.CONCLUSIONES
-En conclusión los beneficiarios de este análisis llegan a ser diversas entidades, logrando abarcar desde el equipo de gestión del hotel hasta especialistas en marketing y planificadores de recursos. El equipo de gestión del hotel puede utilizar los resultados para tomar decisiones informadas sobre la ocupación y mejorar la satisfacción del cliente. Los especialistas en marketing pueden ajustar sus estrategias para atraer a diferentes segmentos de mercado, mientras que los planificadores de recursos podrían optimizar la gestión de habitaciones y servicios en función de la demanda histórica y las preferencias de los huéspedes. En resumen, estos datos ofrecen una base sólida para la toma de decisiones en la industria hotelera y áreas relacionadas.
+Este gráfico como se mencionó anteriormente nos mostrará las distintas columnas que contengan alumnos un valor NA o NULL, sin embargo debido a la eliminación de las columnas que contienen valores NULL, solo nos quedaron estas 3 filas en children las cuales cuentan con valores NA.
 
-a) Respecto a la primera pregunta se logra concluir que las personas prefieren realizar una reserva en el hotel City Hotel, este análisis nos sirve a futuro para poder saber qué hotel es el más valorado por los visitantes.
-b) En la segunda pregunta se puede observar que durante el primer y segundo año, hubo un incremento considerado de las reservas; pero, tras el segundo y tercer año, hubo un declive considerado, por lo que se puede concluir que las cantidades de reservas a futuro llegarán a disminuir, pero aún habrá reservas considerables.
-c) Se llega a concluir en la tercera pregunta que los meses posteriores al invierno generan una mayor demanda de reservas.
-d) Lo concluido en la cuarta pregunta, es que durante los meses que contempla el invierno las reservas decaen considerablemente para ambos hoteles, por lo que se recomienda que en las temporadas altas el costo de reserva incremente, gracias a la alta demanda.
-e) En la quinta pregunta se logra evidenciar que las personas que realizan reservas en los distintos hoteles no acuden a este con algún niño. En conclusión es mejor destinar los recursos de los hoteles a un mejor entretenimiento para el público mayor.
-f) De la sexta pregunta se logra concluir que las personas no requieren un espacio de estacionamiento, por lo que se recomienda no invertir en una gran cantidad de estas zonas.
-g) Se llega a concluir de la última pregunta que en los meses de enero se genera una mayor cantidad de cancelaciones de hotel, mostrando un pico de 2616 cancelaciones en el año de 2017.
+##### Análisis de las variables:
 
-------------
-#### 4.BIBLIOGRAFIA
+Children:
 
-Antonio,N.,deAlmeida,A.,&Nunes,L.(2019).Hotelbookingdemanddatasets.Datainbrief,22,41-49.Recuperado de:https://doi.org/10.1016/j.dib.2018.11.126  (Consulta:03 de septiembre del 2023)
 
-Follow, S. (2021, julio 27). Filter data by multiple conditions in R using Dplyr. GeeksforGeeks. Recuperado de:https://www.geeksforgeeks.org/filter-data-by-multiple-conditions-in-r-using-dplyr/
+Lo primero que se pensaría en hacer sería utilizar eliminar las variables NA con na.omit(), sin embargo esto sería un error ya que estaríamos perdiendo información muy pertinente para responder otras preguntas, puesto que eliminamos la fila.
 
-Data visualization with ggplot2. (s/f). Datacarpentry.org. Recuperado el 24 de septiembre de 2023. Recuperado de: https://datacarpentry.org/R-ecology-lesson/04-visualization-ggplot2.html
+Ahora, si realizamos una imputación basada en la lógica, podemos llegar a la conclusión de que el valor faltante NA en la columna de bebés significa que no hay niños o bebes en ese reserva. Por lo que en este caso esos datos los podemos reemplazar por 0.
 
-Dplyr. (s/f). Rdocumentation.org. Recuperado el 24 de septiembre de 2023. Recuperado de:https://www.rdocumentation.org/packages/dplyr/versions/0.7.8
+![imagen13](https://github.com/QuispeAyalaDiego/CC216-TP-2023-2-CC51/assets/103915075/b332a56a-c1fd-443a-a0ac-15baf712aec6)
 
-hotel_bookings.csv. (s/f). Google Docs. Recuperado el 24 de septiembre de 2023. Ruperador de: https://drive.google.com/file/d/1G0-AKU6Lx5i23a1o62wCPSwBQHg1wls1/view
+Después de ellos podemos crear una nueva variable la cual nos permite saber cuántas reservas incluyen niños o bebes.
+
+![imagen14](https://github.com/QuispeAyalaDiego/CC216-TP-2023-2-CC51/assets/103915075/42b7742c-f563-4f78-88f7-7483bb11abb8)
+
+![imagen15](https://github.com/QuispeAyalaDiego/CC216-TP-2023-2-CC51/assets/103915075/16a81a3c-83fe-457d-bee3-767316ba6641)
+
+Arrival_date:
+
+Debido a que en nuestro caso nos interesa saber si el valor es pequeño, mediano o grande con respecto a las temporadas de reservas, haremos uso de la categorización de datos numéricos.
+En este caso se decidió utilizar las estaciones para clasificar la temporadas de la siguiente manera:
+
+
+Baja temporada: Las estaciones con menor cantidad de reservaciones.
+Media temporada: Las estaciones con una cantidad moderada de reservaciones.
+Alta temporada: Las estaciones con la mayor cantidad de reservaciones.
+
+Para realizar esto primero debemos agrupar los meses por estaciones para poder trabajar con esos datos así mismo siendo separados por años para un análisis más concreto de la siguiente manera:
+Invierno(Diciembre, Enero, Febrero)
+Primavera(Marzo, Abril, Mayo)
+Verano(Junio, Julio, Agosto)
+Otoño(Setiembre, Octubre, Noviembre)
+Codigo en cuestion:
+
+
+
+`` # Convertir los nombres de los meses en minúscula en missing_data_rows
+missing_data_rows <- missing_data_rows %>%
+  mutate(arrival_date_month = tolower(arrival_date_month))
+
+# Asignar estaciones por cada mes en missing_data_rows
+missing_data_rows <- missing_data_rows %>%
+  left_join(meses_estaciones, by = c("arrival_date_month" = "mes"))
+
+# Calcular el número de reservas por estación y año en missing_data_rows
+missing_data_rows_seasons <- missing_data_rows %>%
+  group_by(estacion, arrival_date_year) %>%
+  summarise(total_bookings = n())
+
+# Crear un dataframe con todas las combinaciones de estaciones y años
+all_combinations <- expand.grid(estacion = estaciones, arrival_date_year = unique(missing_data_rows$arrival_date_year))
+
+# Combinar con los datos reales y rellenar valores faltantes con ceros
+missing_data_rows_seasons <- all_combinations %>%
+  left_join(missing_data_rows_seasons, by = c("estacion", "arrival_date_year")) %>%
+  mutate(total_bookings = replace_na(total_bookings, 0))
+
+# Calcular estadísticas resumen (media) para cada estación
+summary_stats <- missing_data_rows_seasons %>%
+  group_by(estacion) %>%
+  summarise(avg_total_bookings = mean(total_bookings))``
+
+  ![imagen16](https://github.com/QuispeAyalaDiego/CC216-TP-2023-2-CC51/assets/103915075/6a11e091-77fd-4504-9433-59e0dc56ca81)
+
+
+
