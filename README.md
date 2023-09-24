@@ -74,7 +74,7 @@ ggplot(missing_data_rows_seasons, aes(x = factor(arrival_date_year), y = total_b
 ```
 En la siguiente gráfica y tabla hemos agrupado la cantidad de reservas realizadas, por estación y por año, para una mejor visualización de las temporadas altas y bajas.
 
-
+![imagen1 PNG](https://github.com/QuispeAyalaDiego/CC216-TP-2023-2-CC51/assets/83883211/46d2619a-ee23-4afa-8250-b6082cc9da8d)
 ![imagen2](https://github.com/QuispeAyalaDiego/CC216-TP-2023-2-CC51/assets/103915075/1a051b69-d088-4d82-ba28-e3873311f8e6)
 Figura 2.
 
@@ -121,7 +121,7 @@ pie(conteo_bebes, labels = c("No tiene niño o bebe", "Tiene niño o bebe"), col
 
 
 ```
-![imagen5](https://github.com/QuispeAyalaDiego/CC216-TP-2023-2-CC51/assets/103915075/42ee296f-a05d-4bac-a155-6eacd60b4945)
+![imagennn55](https://github.com/QuispeAyalaDiego/CC216-TP-2023-2-CC51/assets/83883211/9eb84a51-ea91-45d6-9be0-f763b930c238)
 Verificando la cantidad de reservas que tuvieron un niño o bebé como huésped, se puede visualizar que fueron 9332
 
 f. ¿Es importante contar con espacios de estacionamiento?
