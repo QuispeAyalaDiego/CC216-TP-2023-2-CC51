@@ -253,7 +253,7 @@ g) Se llega a concluir de la última pregunta que en los meses de enero se gener
 
 Antonio,N.,deAlmeida,A.,&Nunes,L.(2019).Hotelbookingdemanddatasets.Datainbrief,22,41-49.Recuperado de:https://doi.org/10.1016/j.dib.2018.11.126  (Consulta:03 de septiembre del 2023)
 
-Follow, S. (2021, julio 27). Filter data by multiple conditions in R using Dplyr. GeeksforGeeks. Recuperado de: Filter data by multiple conditions in R using Dplyr - GeeksforGeeks
+Follow, S. (2021, julio 27). Filter data by multiple conditions in R using Dplyr. GeeksforGeeks. Recuperado de:https://www.geeksforgeeks.org/filter-data-by-multiple-conditions-in-r-using-dplyr/
 
 Data visualization with ggplot2. (s/f). Datacarpentry.org. Recuperado el 24 de septiembre de 2023. Recuperado de: https://datacarpentry.org/R-ecology-lesson/04-visualization-ggplot2.html
 
