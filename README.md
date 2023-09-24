@@ -222,4 +222,4 @@ missing_data_rows <- hotel_data %>%
 #### 4.BIBLIOGRAFIA
 
 Antonio,N.,deAlmeida,A.,&Nunes,L. (2019).Hotelbookingdemanddatasets.Datainbrief,22,41-49.Recuperadode:
-https://doi.org/10.1016/j.dib.2018.11.126 [Consulta:03de mayodel2023]
+https://doi.org/10.1016/j.dib.2018.11.126 [Consulta:03de septiembre del2023]
