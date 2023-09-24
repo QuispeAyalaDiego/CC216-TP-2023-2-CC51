@@ -44,6 +44,8 @@ a. ¿Cuántas reservas se realizan por tipo de hotel? o  ¿Qué tipo de hotel pr
 ```
 b. ¿Está aumentando la demanda con el tiempo? 
 ![imagen1 PNG](https://github.com/QuispeAyalaDiego/CC216-TP-2023-2-CC51/assets/103915075/feaa4a1b-2c53-435b-8900-adf7ce0f018d)
+
+![imagen2](https://github.com/QuispeAyalaDiego/CC216-TP-2023-2-CC51/assets/103915075/1a051b69-d088-4d82-ba28-e3873311f8e6)
 ```
 # Crear un gráfico de barras apiladas
 ggplot(missing_data_rows_seasons, aes(x = factor(arrival_date_year), y = total_bookings, fill = estacion)) +
@@ -55,7 +57,7 @@ ggplot(missing_data_rows_seasons, aes(x = factor(arrival_date_year), y = total_b
 ```
 
 c. ¿Cuándo se producen las temporadas de reservas: alta, media y baja? 
-
+![imagen3](https://github.com/QuispeAyalaDiego/CC216-TP-2023-2-CC51/assets/103915075/0556e48c-33d8-4e92-8a02-d026aaa3adbf)
 ```
  # Crear un gráfico de barras facetado por estación
 ggplot(missing_data_rows_seasons, aes(x = factor(arrival_date_year), y = total_bookings, fill = estacion)) +
@@ -68,6 +70,7 @@ ggplot(missing_data_rows_seasons, aes(x = factor(arrival_date_year), y = total_b
 
 ```
 d. ¿Cuándo es menor la demanda de reservas? 
+![imagen4](https://github.com/QuispeAyalaDiego/CC216-TP-2023-2-CC51/assets/103915075/f1d73d30-075e-4ea6-a778-df6c4be8addd)
 ```
 # Crear un gráfico de barras de la cantidad total de reservas por estación
 ggplot(missing_data_rows_seasons, aes(x = estacion, y = total_bookings, fill = estacion)) +
@@ -79,15 +82,17 @@ ggplot(missing_data_rows_seasons, aes(x = estacion, y = total_bookings, fill = e
 ```
 
 e. ¿Cuántas reservas incluyen niños y/o bebes? 
-
+![imagen5](https://github.com/QuispeAyalaDiego/CC216-TP-2023-2-CC51/assets/103915075/42ee296f-a05d-4bac-a155-6eacd60b4945)
 ```
 pie(conteo_bebes, labels = c("No tiene niño o bebe", "Tiene niño o bebe"), col = c("chartreuse1", "darkturquoise")	
 
 
 ```
 
+
+f. ¿Es importante contar con espacios de estacionamiento?
+![imagen6](https://github.com/QuispeAyalaDiego/CC216-TP-2023-2-CC51/assets/103915075/7e77dcad-953a-4cf6-a118-95908f2bb283)
 ```
-f. ¿Es importante contar con espacios de estacionamiento? 
 # Filtrar los datos para obtener personas que no han cancelado (0)
 personas_no_canceladas <- missing_data_rows[missing_data_rows$is_canceled == 0, ]
 # Crear un dataframe para el gráfico
@@ -104,7 +109,7 @@ scale_fill_manual(values = c("Necesitaron Estacionamiento" = "blue", "No Necesit
 theme_minimal()
 ```
 g. ¿En qué meses del año se producen más cancelaciones de reservas?
-
+![imagen7](https://github.com/QuispeAyalaDiego/CC216-TP-2023-2-CC51/assets/103915075/03287359-fdf7-42a8-8c95-319e540ac3fc)
 ```
 # Convertir la columna 'reservation_status_date' a formato de fecha 
 missing_data_rows$reservation_status_date <-as.Date(missing_data_rows$reservation_status_date)
